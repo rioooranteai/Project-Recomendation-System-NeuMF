@@ -39,7 +39,43 @@ Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pe
     - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai jumlah data, kondisi data, dan informasi mengenai data yang digunakan. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+Dataset yang digunakan adalah **Stroke Prediction Dataset** dari Kaggle ([https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)). Terdiri atas 5.110 entri data dengan 2 kelas. Data ini cukup mendekati karakteristik variabel yang menandai stroke berdasarkan riset yang telah disampaikan pada latar belakang.
+
+3.1 Deskripsi Dataset
+
+a. Ratings
+| No. | Kolom    | Tipe Data | Jumlah Non-Null | Deskripsi                                                              |
+| --- | -------- | --------- | --------------- | ---------------------------------------------------------------------- |
+| 1   | user\_id | int64     | 981,756         | ID pengguna yang memberikan rating pada buku                           |
+| 2   | book\_id | int64     | 981,756         | ID buku yang diberi rating                                             |
+| 3   | rating   | int64     | 981,756         | Nilai rating yang diberikan oleh pengguna terhadap buku (biasanya 1–5) |
+
+b. Books
+| No. | Kolom                       | Tipe Data | Jumlah Non-Null | Deskripsi                                                   |
+| --- | --------------------------- | --------- | --------------- | ----------------------------------------------------------- |
+| 1   | id                          | int64     | 10,000          | ID unik untuk setiap entri buku                             |
+| 2   | book\_id                    | int64     | 10,000          | ID buku, kemungkinan digunakan untuk relasi antar tabel     |
+| 3   | best\_book\_id              | int64     | 10,000          | ID dari versi terbaik buku (representatif satu buku)        |
+| 4   | work\_id                    | int64     | 10,000          | ID karya umum (bisa terdiri dari banyak edisi)              |
+| 5   | books\_count                | int64     | 10,000          | Jumlah edisi berbeda dari buku tersebut                     |
+| 6   | isbn                        | object    | 9,300           | ISBN 10-digit dari buku                                     |
+| 7   | isbn13                      | float64   | 9,415           | ISBN 13-digit dari buku                                     |
+| 8   | authors                     | object    | 10,000          | Nama penulis buku                                           |
+| 9   | original\_publication\_year | float64   | 9,979           | Tahun asli penerbitan pertama buku                          |
+| 10  | original\_title             | object    | 9,415           | Judul asli dari buku (tanpa subtitle atau versi terjemahan) |
+| 11  | title                       | object    | 10,000          | Judul yang ditampilkan di dataset                           |
+| 12  | language\_code              | object    | 8,916           | Kode bahasa buku (misal: 'en', 'spa')                       |
+| 13  | average\_rating             | float64   | 10,000          | Rata-rata rating dari semua pengguna Goodreads              |
+| 14  | ratings\_count              | int64     | 10,000          | Jumlah total rating yang diterima buku                      |
+| 15  | work\_ratings\_count        | int64     | 10,000          | Jumlah rating untuk seluruh edisi (berdasarkan `work_id`)   |
+| 16  | work\_text\_reviews\_count  | int64     | 10,000          | Jumlah ulasan teks yang diberikan pengguna                  |
+| 17  | ratings\_1                  | int64     | 10,000          | Jumlah rating bintang 1                                     |
+| 18  | ratings\_2                  | int64     | 10,000          | Jumlah rating bintang 2                                     |
+| 19  | ratings\_3                  | int64     | 10,000          | Jumlah rating bintang 3                                     |
+| 20  | ratings\_4                  | int64     | 10,000          | Jumlah rating bintang 4                                     |
+| 21  | ratings\_5                  | int64     | 10,000          | Jumlah rating bintang 5                                     |
+| 22  | image\_url                  | object    | 10,000          | URL gambar sampul buku                                      |
+| 23  | small\_image\_url           | object    | 10,000          | URL gambar sampul kecil (thumbnail)                         |
 
 Selanjutnya, uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
 
