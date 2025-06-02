@@ -39,7 +39,16 @@ Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pe
     - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
 
 ## Data Understanding
-Dataset yang digunakan adalah **Stroke Prediction Dataset** dari Kaggle ([https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)). Terdiri atas 5.110 entri data dengan 2 kelas. Data ini cukup mendekati karakteristik variabel yang menandai stroke berdasarkan riset yang telah disampaikan pada latar belakang.
+Dataset yang digunakan dalam proyek ini adalah **Goodbooks-10K** ([Kaggle - Goodbooks-10k Dataset](https://www.kaggle.com/datasets/zygmunt/goodbooks-10k)). Secara keseluruhan, dataset ini terdiri dari beberapa file, yaitu:
+
+* `books.csv`
+* `ratings.csv`
+* `books_tags.csv`
+* `tags.csv`
+* `to_read.csv`
+* `sample_book.xml`
+
+Namun, dalam proyek ini hanya dua file yang digunakan, yaitu **`ratings.csv`** dan **`books.csv`**, karena keduanya sudah cukup untuk membangun sistem rekomendasi berdasarkan interaksi pengguna dengan buku.
 
 ### 3.1 Deskripsi Dataset
 
@@ -79,15 +88,27 @@ Dataset yang digunakan adalah **Stroke Prediction Dataset** dari Kaggle ([https:
 | 22  | image\_url                  | object    | 10,000          | URL gambar sampul buku                                      |
 | 23  | small\_image\_url           | object    | 10,000          | URL gambar sampul kecil (thumbnail)                         |
 
-Selanjutnya, uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+### 3.2 Distribusi Rating
+![Korelasi Antar Fitur](img/class-distribution.png)
+- Berdasarkan grafik distribusi rating pengguna, terlihat bahwa mayoritas pengguna cenderung memberikan rating tinggi, dengan rating 4 menjadi yang paling banyak diberikan, disusul oleh rating 5. Sebaliknya, rating rendah seperti 1 dan 2 jarang diberikan, menunjukkan bahwa pengguna cenderung memiliki persepsi positif terhadap film yang mereka tonton. Rating 3 sebagai nilai tengah juga cukup banyak muncul, mencerminkan adanya penilaian netral. Distribusi ini bersifat positif atau condong ke arah rating tinggi, yang merupakan pola umum dalam data rating film. Pola ini penting untuk diperhatikan saat membangun sistem rekomendasi, karena kecenderungan pengguna memberikan rating tinggi dapat memengaruhi cara model dalam membedakan preferensi antar pengguna.
 
-Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+### 3.3 Rating Per-User
+![Korelasi Antar Fitur](img/rating-peruser.png)
+- Dari histogram “Distribusi Jumlah Rating per Pengguna” di atas, dapat dilihat bahwa mayoritas pengguna hanya memberi rating pada sejumlah kecil buku (misalnya 1–5 buku), di mana puncak tertinggi (sekitar 20.000 pengguna) berada pada bin paling kiri (pengguna yang memberi rating sangat rendah). Seiring meningkatnya jumlah buku yang dirating per pengguna, jumlah pengguna menurun drastis—misalnya hanya beberapa ribu pengguna yang merating sekitar 10–20 buku, dan semakin sedikit lagi (beberapa ratus atau puluhan saja) yang merating puluhan hingga ratusan buku. Kurva kepadatan mempertegas pola ini: sangat “menonjol” di nilai rendah dan kemudian memerah ke kanan dengan ekor panjang hingga sekitar 200 buku. Artinya, distribusi ini sangat miring ke kanan (right-skewed): sebagian besar pengguna bersifat “casual” dengan sedikit interaksi (sedikit memberi rating), sedangkan hanya segelintir “power user” yang banyak merating buku.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data beserta insight atau exploratory data analysis.
+### 3.4 Rating Per-Book
+![Korelasi Antar Fitur](img/rating-perbuku.png)
+- Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengumpulkan jumlah rating yang sangat tinggi—terkonsentrasi di kisaran 90–100—sementara sangat sedikit buku yang mendapat rating di bawah 50, sehingga distribusinya tampak sangat miring ke kanan; hal ini menandakan bahwa data kemungkinan hanya mencakup buku-buku populer yang sudah memiliki basis pembaca/rater besar, sehingga nilai rata‐rata jumlah rating per buku menjadi sangat dekat dengan batas atas (100).
+
+### 3.4 Hitung Missing Value
+| No. | Kolom                       | Jumlah Missing |
+| --- | --------------------------- | -------------- |
+| 1   | isbn                        | 700            |
+| 2   | isbn13                      | 585            |
+| 3   | original\_publication\_year | 21             |
+| 4   | original\_title             | 585            |
+| 5   | language\_code              | 1,084          |
+- Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering User-Based dengan fokus pada data rating saja.
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
