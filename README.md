@@ -41,16 +41,16 @@ Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pe
 ## Data Understanding
 Dataset yang digunakan adalah **Stroke Prediction Dataset** dari Kaggle ([https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)). Terdiri atas 5.110 entri data dengan 2 kelas. Data ini cukup mendekati karakteristik variabel yang menandai stroke berdasarkan riset yang telah disampaikan pada latar belakang.
 
-3.1 Deskripsi Dataset
+### 3.1 Deskripsi Dataset
 
-a. Ratings
+* a. Ratings
 | No. | Kolom    | Tipe Data | Jumlah Non-Null | Deskripsi                                                              |
 | --- | -------- | --------- | --------------- | ---------------------------------------------------------------------- |
 | 1   | user\_id | int64     | 981,756         | ID pengguna yang memberikan rating pada buku                           |
 | 2   | book\_id | int64     | 981,756         | ID buku yang diberi rating                                             |
 | 3   | rating   | int64     | 981,756         | Nilai rating yang diberikan oleh pengguna terhadap buku (biasanya 1–5) |
 
-b. Books
+* b. Books
 | No. | Kolom                       | Tipe Data | Jumlah Non-Null | Deskripsi                                                   |
 | --- | --------------------------- | --------- | --------------- | ----------------------------------------------------------- |
 | 1   | id                          | int64     | 10,000          | ID unik untuk setiap entri buku                             |
