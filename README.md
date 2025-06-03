@@ -98,10 +98,12 @@ Berdasarkan grafik distribusi rating pengguna, terlihat bahwa mayoritas pengguna
 
 ### 3.3 Rating Per-User
 ![Rating Per-User](img/rating-peruser.png)
+
 Dari histogram “Distribusi Jumlah Rating per Pengguna” di atas, dapat dilihat bahwa mayoritas pengguna hanya memberi rating pada sejumlah kecil buku (misalnya 1–5 buku), di mana puncak tertinggi (sekitar 20.000 pengguna) berada pada bin paling kiri (pengguna yang memberi rating sangat rendah). Seiring meningkatnya jumlah buku yang dirating per pengguna, jumlah pengguna menurun drastis—misalnya hanya beberapa ribu pengguna yang merating sekitar 10–20 buku, dan semakin sedikit lagi (beberapa ratus atau puluhan saja) yang merating puluhan hingga ratusan buku. Kurva kepadatan mempertegas pola ini: sangat “menonjol” di nilai rendah dan kemudian memerah ke kanan dengan ekor panjang hingga sekitar 200 buku. Artinya, distribusi ini sangat miring ke kanan (right-skewed): sebagian besar pengguna bersifat “casual” dengan sedikit interaksi (sedikit memberi rating), sedangkan hanya segelintir “power user” yang banyak merating buku.
 
 ### 3.4 Rating Per-Book
 ![Rating Per-Book](img/rating-perbuku.png)
+
 Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengumpulkan jumlah rating yang sangat tinggi—terkonsentrasi di kisaran 90–100—sementara sangat sedikit buku yang mendapat rating di bawah 50, sehingga distribusinya tampak sangat miring ke kanan; hal ini menandakan bahwa data kemungkinan hanya mencakup buku-buku populer yang sudah memiliki basis pembaca/rater besar, sehingga nilai rata‐rata jumlah rating per buku menjadi sangat dekat dengan batas atas (100).
 
 ### 3.4 Hitung Missing Value
@@ -112,7 +114,8 @@ Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengump
 | 3   | original\_publication\_year | 21             |
 | 4   | original\_title             | 585            |
 | 5   | language\_code              | 1,084          |
-- Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering User-Based dengan fokus pada data rating saja.
+
+Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering User-Based dengan fokus pada data rating saja.
 
 ## Data Preparation
 ### 4.1 Pemisahan Fitur dan Target
@@ -184,7 +187,7 @@ Parameter atau komponen yang digunakan dalam model ini
 | `metrics=['mae', RMSE]`              | MAE (Mean Absolute Error) dan RMSE digunakan sebagai metrik evaluasi performa prediksi. | MAE memberi gambaran rata-rata kesalahan absolut, RMSE lebih sensitif terhadap kesalahan besar.         |
 
 
-Berikut adalah rekomendasi 10 buku teratas untuk user 4 dalam bentuk tabel:
+Berikut adalah rekomendasi 10 buku teratas untuk user 4:
 
 | No. | Book ID | Predicted Rating | Title                                                                            | Author                                                                                                                                                   |
 | --- | ------- | ---------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -207,14 +210,14 @@ Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk meny
 
 ## Evaluation 
 ### 6.1 Visualisasi Kurva Loss
-Plot ini digunakan untuk memantau performa model selama proses pelatihan. Kurva menunjukkan bagaimana nilai **loss** pada data pelatihan (`Train Loss`) dan data validasi (`Validation Loss`) berubah seiring bertambahnya epoch.
+Plot ini digunakan untuk memantau **Mean Squared Error (MSE)** model selama proses pelatihan.
 
-* Sumbu **x** menunjukkan jumlah epoch (iterasi pelatihan).
-* Sumbu **y** menunjukkan nilai loss (MSE) pada masing-masing epoch.
-* Kurva **Train Loss** mencerminkan seberapa baik model mempelajari data pelatihan.
-* Kurva **Validation Loss** menunjukkan generalisasi model terhadap data yang tidak dilatih.
+* **Sumbu x**: jumlah epoch (iterasi pelatihan).
+* **Sumbu y**: nilai loss (MSE) pada masing-masing epoch.
+* **Train Loss**: mencerminkan seberapa baik model mempelajari data pelatihan.
+* **Validation Loss**: menunjukkan generalisasi model terhadap data yang tidak dilatih.
 
-Model ini menggunakan **Mean Squared Error (MSE)** sebagai fungsi loss utama untuk pelatihan.
+### 🔢 Metrik Evaluasi: Mean Squared Error (MSE)
 
 #### 📐 Formula:
 
@@ -224,19 +227,27 @@ $$
 
 * $y_i$: nilai aktual (true rating)
 * $\hat{y}_i$: nilai prediksi dari model
-* $n$: jumlah data (contoh)
+* $n$: jumlah sampel
 
 #### ⚙️ Cara Kerja:
 
-1. Model memprediksi output $\hat{y}_i$ untuk setiap input.
-2. Selisih antara nilai prediksi dan nilai sebenarnya dihitung: $y_i - \hat{y}_i$.
-3. Selisih ini dikuadratkan untuk memastikan semua nilai positif dan memberi penalti besar terhadap kesalahan besar.
-4. Semua nilai kuadrat dijumlahkan dan dirata-ratakan → menghasilkan MSE.
-5. Tujuan pelatihan: **meminimalkan nilai MSE**.
+1. Model memprediksi nilai $\hat{y}_i$ untuk setiap input.
+2. Hitung selisih antara nilai prediksi dan nilai aktual: $y_i - \hat{y}_i$.
+3. Kuadratkan selisih untuk memberi penalti lebih besar terhadap error yang besar.
+4. Hitung rata-rata dari semua error kuadrat → menghasilkan nilai MSE.
+5. Selama pelatihan, model mencoba **meminimalkan nilai MSE**.
 
-MSE bekerja sebagai indikator utama seberapa dekat prediksi model dengan nilai aktual. Karena dikuadratkan, **kesalahan besar akan lebih berdampak** — sehingga MSE sangat sensitif terhadap outlier.
+MSE digunakan sebagai **fungsi loss utama** karena memberikan sinyal kuat terhadap error yang besar, sehingga cocok untuk regresi rating.
 
-Tujuan dari visualisasi ini adalah untuk mendeteksi tanda-tanda **overfitting** (misalnya, ketika `val_loss` meningkat sementara `loss` terus menurun) atau **underfitting** (kedua kurva tetap tinggi). Idealnya, kedua kurva menurun dan saling berdekatan.
+### 🎯 Tujuan Visualisasi
+
+Visualisasi loss digunakan untuk:
+
+* **Mendeteksi overfitting**: `val_loss` naik sementara `loss` terus menurun.
+* **Mendeteksi underfitting**: kedua kurva tetap tinggi dan tidak menurun.
+* **Menilai konsistensi pembelajaran**: kurva idealnya menurun dan saling berdekatan.
+
+📌 **Pola ideal**: kedua kurva (Train & Validation Loss) menurun secara konsisten dan berada cukup dekat.
 
 ![Kurva Loss](img/model-loss.png)
 
