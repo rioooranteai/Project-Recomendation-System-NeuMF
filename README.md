@@ -213,6 +213,28 @@ Plot ini digunakan untuk memantau performa model selama proses pelatihan. Kurva 
 * Kurva **Train Loss** mencerminkan seberapa baik model mempelajari data pelatihan.
 * Kurva **Validation Loss** menunjukkan generalisasi model terhadap data yang tidak dilatih.
 
+Model ini menggunakan **Mean Squared Error (MSE)** sebagai fungsi loss utama untuk pelatihan.
+
+#### 📐 Formula:
+
+$$
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
+
+* $y_i$: nilai aktual (true rating)
+* $\hat{y}_i$: nilai prediksi dari model
+* $n$: jumlah data (contoh)
+
+#### ⚙️ Cara Kerja:
+
+1. Model memprediksi output $\hat{y}_i$ untuk setiap input.
+2. Selisih antara nilai prediksi dan nilai sebenarnya dihitung: $y_i - \hat{y}_i$.
+3. Selisih ini dikuadratkan untuk memastikan semua nilai positif dan memberi penalti besar terhadap kesalahan besar.
+4. Semua nilai kuadrat dijumlahkan dan dirata-ratakan → menghasilkan MSE.
+5. Tujuan pelatihan: **meminimalkan nilai MSE**.
+
+MSE bekerja sebagai indikator utama seberapa dekat prediksi model dengan nilai aktual. Karena dikuadratkan, **kesalahan besar akan lebih berdampak** — sehingga MSE sangat sensitif terhadap outlier.
+
 Tujuan dari visualisasi ini adalah untuk mendeteksi tanda-tanda **overfitting** (misalnya, ketika `val_loss` meningkat sementara `loss` terus menurun) atau **underfitting** (kedua kurva tetap tinggi). Idealnya, kedua kurva menurun dan saling berdekatan.
 
 ![Kurva Loss](img/model-loss.png)
