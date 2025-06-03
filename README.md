@@ -114,11 +114,23 @@ Namun, dalam proyek ini hanya dua file yang digunakan, yaitu **`ratings.csv`** d
 - Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering User-Based dengan fokus pada data rating saja.
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+### 4.1 Pemisahan Fitur dan Target
+Pemisahan data fitur dan target untuk model rekomendasi, di mana X berisi pasangan pengguna dan buku, dan y berisi nilai rating. Proses ini diperlukan agar model dapat belajar memetakan input ke output secara jelas dan menghindari kebocoran data saat pelatihan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+```python
+X = ratings[['user_id', 'book_id']].values
+y = ratings['rating'].values
+```
+### 4.2 Train-Test Split
+Distribusi rating tidak seimbang sehingga pembagian data train dan validasi dilakukan menggunakan StratifiedShuffleSplit agar proporsi rating pada kedua set tetap terjaga dengan rasio 80:20. Hal ini dilakukan agar distribusi rating yang tidak seimbang tetap terjaga di kedua set, sehingga model dapat belajar dan dievaluasi secara representatif tanpa bias terhadap kelas rating tertentu. 
+
+```python
+splitter = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+
+for train_idx, val_idx in splitter.split(X, ratings['rating']):
+    X_train, X_val = X[train_idx], X[val_idx]
+    y_train, y_val = y[train_idx], y[val_idx]
+```
 
 ## Modeling
 Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
