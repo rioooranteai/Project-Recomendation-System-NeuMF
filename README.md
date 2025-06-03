@@ -243,31 +243,94 @@ Pada awal pelatihan (epoch 0–1), nilai loss untuk data training dan validasi s
 
 
 ### 6.2 Visualisasi Kurva MAE
-## Visualisasi Kurva MAE
 
 Kurva ini digunakan untuk memantau **Mean Absolute Error (MAE)** model selama proses pelatihan.
 
-* Sumbu **x** menunjukkan jumlah epoch.
-* Sumbu **y** menunjukkan nilai MAE, yaitu rata-rata selisih absolut antara prediksi model dan nilai rating sebenarnya.
-* **Train MAE** menunjukkan performa model pada data pelatihan.
-* **Validation MAE** menunjukkan seberapa baik model melakukan generalisasi pada data yang tidak dilatih.
+* **Sumbu x**: menunjukkan jumlah epoch (iterasi pelatihan).
+* **Sumbu y**: menunjukkan nilai MAE, yaitu rata-rata dari selisih absolut antara prediksi dan rating sebenarnya.
+* **Train MAE**: mencerminkan performa model terhadap data pelatihan.
+* **Validation MAE**: menunjukkan kemampuan generalisasi model terhadap data validasi (tidak dilatih).
 
-MAE memberikan gambaran intuitif tentang rata-rata besar kesalahan model. Pola ideal adalah ketika kedua kurva menurun dan berada cukup dekat, yang menandakan model belajar dengan baik dan tidak overfitting.
+### 🔢 Metrik Evaluasi: Mean Absolute Error (MAE)
+
+#### 📐 Formula:
+
+$$
+\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} \left| y_i - \hat{y}_i \right|
+$$
+
+* $y_i$: nilai aktual (true rating)
+* $\hat{y}_i$: nilai prediksi dari model
+* $n$: jumlah data (contoh)
+
+#### ⚙️ Cara Kerja:
+
+1. Model menghasilkan prediksi $\hat{y}_i$ untuk setiap input.
+2. Hitung selisih absolut antara nilai aktual dan prediksi: $\left| y_i - \hat{y}_i \right|$.
+3. Semua selisih absolut dijumlahkan dan dirata-ratakan → menghasilkan MAE.
+4. Nilai MAE menunjukkan rata-rata kesalahan prediksi dalam satuan yang sama dengan target (rating).
+
+Berbeda dengan MSE yang memperbesar efek outlier (karena kuadrat), **MAE memberikan penalti yang lebih moderat** dan sering dianggap lebih stabil ketika data memiliki noise atau outlier.
+
+### 🎯 Tujuan Visualisasi
+
+Visualisasi kurva MAE bertujuan untuk:
+
+* **Mendeteksi overfitting**: jika `val_mae` mulai naik sementara `train_mae` terus turun.
+* **Mendeteksi underfitting**: jika kedua kurva tetap tinggi atau stagnan.
+* **Evaluasi generalisasi model**: melihat apakah performa model di data validasi mendekati data pelatihan.
+
+📌 **Pola ideal**: kedua kurva menurun seiring epoch dan tetap saling berdekatan — menunjukkan model mampu belajar dan tetap general.
+
 
 ![Kurva Loss](img/model-mae.png)
 
 Pada awal pelatihan (epoch 0–1), nilai MAE (Mean Absolute Error) sangat tinggi, dengan MAE training sekitar 3,7 dan MAE validasi sekitar 3,5, yang mencerminkan prediksi awal model masih jauh dari nilai sebenarnya. Namun, penurunan tajam terjadi dalam beberapa epoch pertama: pada epoch ke-3, MAE training sudah turun ke kisaran 1,5 dan MAE validasi ke sekitar 1,0. Hal ini menunjukkan bahwa model NeuMF sangat cepat menangkap pola dasar dari interaksi pengguna dan item. Dari epoch 4 hingga 15, penurunan MAE masih terus berlangsung meski melambat; MAE training turun secara bertahap dari sekitar 1,3 menjadi 0,75, dan MAE validasi dari 0,95 menjadi sekitar 0,65. Selanjutnya, pada epoch 15–30, baik MAE training maupun validasi mendatar di kisaran 0,6–0,7, menandakan model mulai mencapai konvergensi. Menariknya, pada beberapa titik (sekitar epoch 30 ke atas), MAE validasi sedikit lebih tinggi daripada MAE training, namun selisihnya sangat kecil, sehingga tidak mengindikasikan overfitting signifikan. Secara keseluruhan, kurva MAE yang menurun konsisten dan mendatar menunjukkan bahwa model mampu belajar secara efektif dan menghasilkan prediksi rating yang cukup akurat serta stabil di data validasi.
 
 ### 6.3 Visualisasi Kurva RMSE
-Plot ini menunjukkan perubahan **Root Mean Squared Error (RMSE)** selama pelatihan model.
 
-* Sumbu **x** menunjukkan jumlah epoch.
-* Sumbu **y** menunjukkan nilai RMSE, yaitu akar dari rata-rata kuadrat selisih antara prediksi dan nilai sebenarnya.
-* **Train RMSE** menggambarkan akurasi model terhadap data pelatihan.
-* **Validation RMSE** menunjukkan performa model pada data validasi (yang tidak dilatih).
+Plot ini menunjukkan perubahan **Root Mean Squared Error (RMSE)** selama proses pelatihan model.
 
-RMSE lebih sensitif terhadap error yang besar dibanding MAE, sehingga sangat berguna untuk mendeteksi prediksi yang jauh meleset.
-Kurva yang ideal adalah saat kedua garis (train dan validation) turun dan relatif dekat, menandakan model belajar dengan baik dan tidak overfitting.
+* **Sumbu x**: jumlah epoch (iterasi pelatihan).
+* **Sumbu y**: nilai RMSE, yaitu ukuran rata-rata dari error prediksi terhadap nilai aktual.
+* **Train RMSE**: mengukur akurasi model pada data pelatihan.
+* **Validation RMSE**: mengukur seberapa baik model mengeneralisasi ke data yang tidak dilatih.
+
+---
+
+### 🔢 Metrik Evaluasi: Root Mean Squared Error (RMSE)
+
+#### 📐 Formula:
+
+$$
+\text{RMSE} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 }
+$$
+
+* $y_i$: nilai aktual
+* $\hat{y}_i$: nilai prediksi
+* $n$: jumlah sampel
+
+#### ⚙️ Cara Kerja:
+
+1. Model memprediksi nilai $\hat{y}_i$ untuk setiap input.
+2. Hitung selisih antara prediksi dan nilai aktual: $(y_i - \hat{y}_i)^2$.
+3. Ambil rata-rata dari semua error kuadrat.
+4. Ambil akar kuadrat dari rata-rata tersebut untuk menghasilkan RMSE.
+
+RMSE **memberikan penalti lebih besar terhadap error yang besar** (karena efek kuadrat), sehingga sangat berguna untuk menilai **seberapa parah kesalahan terbesar** model.
+
+---
+
+### 🎯 Tujuan Visualisasi
+
+Visualisasi RMSE bertujuan untuk:
+
+* **Mendeteksi overfitting**: kurva `val_rmse` naik saat `train_rmse` turun.
+* **Mendeteksi underfitting**: jika kedua kurva tetap tinggi dan tidak menurun.
+* **Menilai kestabilan model**: jika kedua kurva turun dan berada dekat satu sama lain.
+
+📌 **Pola ideal**: kedua kurva menurun dengan konsisten dan tetap berdekatan, menandakan model mampu belajar dengan baik dan tidak kehilangan kemampuan generalisasi.
+
 ![Kurva Loss](img/model-rmse.png)
 
 Pada awal pelatihan (epoch 0–1), nilai RMSE (Root Mean Squared Error) sangat tinggi, dengan RMSE training mencapai hampir 3,9 dan RMSE validasi sekitar 3,7. Ini wajar karena model belum belajar dan bobot masih acak. Namun, terjadi penurunan drastis pada beberapa epoch pertama: pada epoch ke-3, RMSE training turun ke sekitar 2,0, sementara RMSE validasi sudah turun mendekati 1,2. Ini menunjukkan bahwa model NeuMF mampu dengan cepat menangkap pola interaksi pengguna–item. Dari epoch 4 hingga 15, penurunan RMSE berlanjut meskipun mulai melambat—RMSE training menurun dari sekitar 1,6 menjadi 0,9, dan RMSE validasi dari sekitar 1,0 menjadi 0,83. Mulai epoch 15 ke atas hingga akhir pelatihan (epoch 37), kurva RMSE cenderung datar, berada di kisaran 0,75–0,9. Pada epoch terakhir, RMSE training sedikit lebih rendah daripada RMSE validasi, tetapi perbedaannya sangat kecil dan stabil. Ini menandakan tidak ada overfitting yang signifikan, dan model berhasil mempertahankan kemampuan generalisasi yang baik. Penurunan RMSE yang konsisten dan stabil juga memperkuat bukti bahwa prediksi model semakin akurat dari waktu ke waktu, meskipun peningkatannya semakin kecil seiring bertambahnya epoch.
