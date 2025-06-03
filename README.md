@@ -171,6 +171,18 @@ Berikut adalah **kelebihan dan kekurangan** dari model **NeuMF (Neural Matrix Fa
 4. **Konsumsi Memori Lebih Tinggi**
    Karena memiliki embedding terpisah untuk GMF dan MLP, jumlah parameter bertambah dua kali lipat dibanding model embedding tunggal.
 
+Parameter atau komponen yang digunakan dalam model ini
+
+| **Parameter / Komponen**             | **Fungsi**                                                                              | **Pengaruh Nilainya terhadap Model**                                                                    |
+| ------------------------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `Dense(1, activation='linear')`      | Layer output dengan 1 neuron, untuk prediksi nilai rating (regresi).                    | Aktivasi linear cocok untuk regresi. Menghasilkan nilai rating sebagai output akhir.                    |
+| `kernel_initializer='lecun_uniform'` | Inisialisasi bobot untuk stabilitas saat training.                                      | Membantu konvergensi awal. Umumnya cocok untuk layer dengan aktivasi linear atau selanjutnya `ReLU`.    |
+| `kernel_regularizer=l2(1e-5)`        | L2 regularisasi pada output layer.                                                      | Mencegah bobot output membesar, menghindari overfitting.                                                |
+| `Adam(learning_rate=1e-4)`           | Optimizer adaptif untuk memperbarui bobot saat training.                                | Learning rate rendah (1e-4) membuat training stabil, meskipun butuh lebih banyak epoch untuk konvergen. |
+| `loss='mse'`                         | Fungsi loss Mean Squared Error, cocok untuk regresi rating.                             | MSE menghitung selisih kuadrat antara prediksi dan rating asli. Sensitif terhadap outlier.              |
+| `metrics=['mae', RMSE]`              | MAE (Mean Absolute Error) dan RMSE digunakan sebagai metrik evaluasi performa prediksi. | MAE memberi gambaran rata-rata kesalahan absolut, RMSE lebih sensitif terhadap kesalahan besar.         |
+
+
 Berikut adalah rekomendasi 10 buku teratas untuk user 4 dalam bentuk tabel:
 
 | No. | Book ID | Predicted Rating | Title                                                                            | Author                                                                                                                                                   |
