@@ -20,26 +20,13 @@ Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
 Bagian laporan ini mencakup:
 
 ### Problem Statements
-
-Menjelaskan pernyataan masalah:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+1. Pengguna kesulitan menemukan produk atau item yang sesuai dengan preferensi mereka karena banyaknya pilihan yang tersedia di platform, sehingga menurunkan kepuasan dan loyalitas pengguna.
+2. Model rekomendasi harus mampu mempelajari pola interaksi pengguna-item secara efektif tanpa mengalami overfitting agar dapat diandalkan pada data baru.
 
 ### Goals
-
-Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
-
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Approach” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
-
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
+1. Meminimalkan nilai Mean Squared Error (MSE), Mean Absolute Error (MAE), dan Root Mean Squared Error (RMSE) selama pelatihan untuk mendapatkan prediksi rating yang akurat.
+2. Memastikan kurva loss dan metrik evaluasi lain menunjukkan pola pelatihan yang ideal, yaitu penurunan konsisten dan kedekatan antara nilai training dan validation, untuk menghindari overfitting maupun underfitting.
+3. Mencapai performa model yang stabil dan konsisten setelah sejumlah epoch pelatihan sehingga model dapat digunakan secara efektif.
 
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini adalah **Goodbooks-10K** ([Kaggle - Goodbooks-10k Dataset](https://www.kaggle.com/datasets/zygmunt/goodbooks-10k)). Secara keseluruhan, dataset ini terdiri dari beberapa file, yaitu:
