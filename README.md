@@ -24,6 +24,13 @@ Dalam upaya membangun sistem rekomendasi buku yang efektif, penelitian ini akan 
 2. Memastikan kurva loss dan metrik evaluasi lain menunjukkan pola pelatihan yang ideal, yaitu penurunan konsisten dan kedekatan antara nilai training dan validation, untuk menghindari overfitting maupun underfitting.
 3. Mencapai performa model yang stabil dan konsisten setelah sejumlah epoch pelatihan sehingga model dapat digunakan secara efektif.
 
+### Solution Statements
+
+1. Membangun model sistem rekomendasi berbasis prediksi rating menggunakan pendekatan pembelajaran mendalam (deep learning).
+2. Menggunakan model **NeuMF (Neural Matrix Factorization)** yang mampu menangkap interaksi kompleks antara pengguna dan item.
+3. Mengevaluasi performa model menggunakan metrik regresi: **MSE (Mean Squared Error)**, **MAE (Mean Absolute Error)**, dan **RMSE (Root Mean Squared Error)**.
+4. Memantau proses pelatihan melalui visualisasi kurva loss dan metrik error untuk menghindari overfitting dan memastikan model mencapai konvergensi.
+
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini adalah **Goodbooks-10K** ([Kaggle - Goodbooks-10k Dataset](https://www.kaggle.com/datasets/zygmunt/goodbooks-10k)). Secara keseluruhan, dataset ini terdiri dari beberapa file, yaitu:
 
