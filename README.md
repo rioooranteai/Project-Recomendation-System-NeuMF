@@ -172,7 +172,7 @@ Berikut adalah **kelebihan dan kekurangan** dari model **NeuMF (Neural Matrix Fa
 4. **Konsumsi Memori Lebih Tinggi**
    Karena memiliki embedding terpisah untuk GMF dan MLP, jumlah parameter bertambah dua kali lipat dibanding model embedding tunggal.
 
-Parameter atau komponen yang digunakan dalam model ini
+Berikut merupakan beberapa contoh (tidak semua ditampilkan pada tabel) parameter atau komponen yang digunakan dalam model ini
 
 | **Parameter / Komponen**             | **Fungsi**                                                                              | **Pengaruh Nilainya terhadap Model**                                                                    |
 | ------------------------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
