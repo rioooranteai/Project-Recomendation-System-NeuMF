@@ -93,15 +93,15 @@ Namun, dalam proyek ini hanya dua file yang digunakan, yaitu **`ratings.csv`** d
 
 ### 3.2 Distribusi Rating
 ![Distribusi Rating](img/class-distribution.png)
-- Berdasarkan grafik distribusi rating pengguna, terlihat bahwa mayoritas pengguna cenderung memberikan rating tinggi, dengan rating 4 menjadi yang paling banyak diberikan, disusul oleh rating 5. Sebaliknya, rating rendah seperti 1 dan 2 jarang diberikan, menunjukkan bahwa pengguna cenderung memiliki persepsi positif terhadap film yang mereka tonton. Rating 3 sebagai nilai tengah juga cukup banyak muncul, mencerminkan adanya penilaian netral. Distribusi ini bersifat positif atau condong ke arah rating tinggi, yang merupakan pola umum dalam data rating film. Pola ini penting untuk diperhatikan saat membangun sistem rekomendasi, karena kecenderungan pengguna memberikan rating tinggi dapat memengaruhi cara model dalam membedakan preferensi antar pengguna.
+Berdasarkan grafik distribusi rating pengguna, terlihat bahwa mayoritas pengguna cenderung memberikan rating tinggi, dengan rating 4 menjadi yang paling banyak diberikan, disusul oleh rating 5. Sebaliknya, rating rendah seperti 1 dan 2 jarang diberikan, menunjukkan bahwa pengguna cenderung memiliki persepsi positif terhadap film yang mereka tonton. Rating 3 sebagai nilai tengah juga cukup banyak muncul, mencerminkan adanya penilaian netral. Distribusi ini bersifat positif atau condong ke arah rating tinggi, yang merupakan pola umum dalam data rating film. Pola ini penting untuk diperhatikan saat membangun sistem rekomendasi, karena kecenderungan pengguna memberikan rating tinggi dapat memengaruhi cara model dalam membedakan preferensi antar pengguna.
 
 ### 3.3 Rating Per-User
 ![Rating Per-User](img/rating-peruser.png)
-- Dari histogram “Distribusi Jumlah Rating per Pengguna” di atas, dapat dilihat bahwa mayoritas pengguna hanya memberi rating pada sejumlah kecil buku (misalnya 1–5 buku), di mana puncak tertinggi (sekitar 20.000 pengguna) berada pada bin paling kiri (pengguna yang memberi rating sangat rendah). Seiring meningkatnya jumlah buku yang dirating per pengguna, jumlah pengguna menurun drastis—misalnya hanya beberapa ribu pengguna yang merating sekitar 10–20 buku, dan semakin sedikit lagi (beberapa ratus atau puluhan saja) yang merating puluhan hingga ratusan buku. Kurva kepadatan mempertegas pola ini: sangat “menonjol” di nilai rendah dan kemudian memerah ke kanan dengan ekor panjang hingga sekitar 200 buku. Artinya, distribusi ini sangat miring ke kanan (right-skewed): sebagian besar pengguna bersifat “casual” dengan sedikit interaksi (sedikit memberi rating), sedangkan hanya segelintir “power user” yang banyak merating buku.
+Dari histogram “Distribusi Jumlah Rating per Pengguna” di atas, dapat dilihat bahwa mayoritas pengguna hanya memberi rating pada sejumlah kecil buku (misalnya 1–5 buku), di mana puncak tertinggi (sekitar 20.000 pengguna) berada pada bin paling kiri (pengguna yang memberi rating sangat rendah). Seiring meningkatnya jumlah buku yang dirating per pengguna, jumlah pengguna menurun drastis—misalnya hanya beberapa ribu pengguna yang merating sekitar 10–20 buku, dan semakin sedikit lagi (beberapa ratus atau puluhan saja) yang merating puluhan hingga ratusan buku. Kurva kepadatan mempertegas pola ini: sangat “menonjol” di nilai rendah dan kemudian memerah ke kanan dengan ekor panjang hingga sekitar 200 buku. Artinya, distribusi ini sangat miring ke kanan (right-skewed): sebagian besar pengguna bersifat “casual” dengan sedikit interaksi (sedikit memberi rating), sedangkan hanya segelintir “power user” yang banyak merating buku.
 
 ### 3.4 Rating Per-Book
 ![Rating Per-Book](img/rating-perbuku.png)
-- Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengumpulkan jumlah rating yang sangat tinggi—terkonsentrasi di kisaran 90–100—sementara sangat sedikit buku yang mendapat rating di bawah 50, sehingga distribusinya tampak sangat miring ke kanan; hal ini menandakan bahwa data kemungkinan hanya mencakup buku-buku populer yang sudah memiliki basis pembaca/rater besar, sehingga nilai rata‐rata jumlah rating per buku menjadi sangat dekat dengan batas atas (100).
+Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengumpulkan jumlah rating yang sangat tinggi—terkonsentrasi di kisaran 90–100—sementara sangat sedikit buku yang mendapat rating di bawah 50, sehingga distribusinya tampak sangat miring ke kanan; hal ini menandakan bahwa data kemungkinan hanya mencakup buku-buku populer yang sudah memiliki basis pembaca/rater besar, sehingga nilai rata‐rata jumlah rating per buku menjadi sangat dekat dengan batas atas (100).
 
 ### 3.4 Hitung Missing Value
 | No. | Kolom                       | Jumlah Missing |
@@ -217,16 +217,41 @@ Tujuan dari visualisasi ini adalah untuk mendeteksi tanda-tanda **overfitting** 
 
 ![Kurva Loss](img/model-loss.png)
 
-- Pada awal pelatihan (epoch 0–1), nilai loss untuk data training dan validasi sangat tinggi (sekitar 15 dan 13) karena bobot model masih diinisialisasi secara acak. Namun, pada epoch pertama, terjadi penurunan drastis: loss training turun menjadi sekitar 7 dan loss validasi menjadi sekitar 3,5, menunjukkan bahwa model mulai mampu mengenali pola interaksi pengguna dan item. Pada epoch 1 hingga 5, loss terus menurun dengan cepat—training loss mencapai sekitar 2,5 dan validation loss mendekati 1,1—menandakan bahwa NeuMF berhasil menyesuaikan bobot embedding dan lapisan dense secara efektif. Setelah epoch ke-5, penurunan loss berjalan lebih lambat (epoch 5–15), dengan training loss turun dari ≈2,5 ke ≈1,1 dan validation loss dari ≈1,1 ke ≈0,8, menandakan model mulai mendekati konvergensi. Dari epoch 15 hingga 37, nilai loss keduanya konsisten berada pada kisaran 0,7–0,9 dengan selisih yang sangat kecil—bahkan terkadang validation loss lebih rendah—yang menunjukkan tidak terjadi overfitting dan model mampu melakukan generalisasi dengan baik. Karena kurva loss sudah melandai sejak sekitar epoch ke-25, pelatihan tambahan hanya memberikan peningkatan yang sangat minim.
+Pada awal pelatihan (epoch 0–1), nilai loss untuk data training dan validasi sangat tinggi (sekitar 15 dan 13) karena bobot model masih diinisialisasi secara acak. Namun, pada epoch pertama, terjadi penurunan drastis: loss training turun menjadi sekitar 7 dan loss validasi menjadi sekitar 3,5, menunjukkan bahwa model mulai mampu mengenali pola interaksi pengguna dan item. Pada epoch 1 hingga 5, loss terus menurun dengan cepat—training loss mencapai sekitar 2,5 dan validation loss mendekati 1,1—menandakan bahwa NeuMF berhasil menyesuaikan bobot embedding dan lapisan dense secara efektif. Setelah epoch ke-5, penurunan loss berjalan lebih lambat (epoch 5–15), dengan training loss turun dari ≈2,5 ke ≈1,1 dan validation loss dari ≈1,1 ke ≈0,8, menandakan model mulai mendekati konvergensi. Dari epoch 15 hingga 37, nilai loss keduanya konsisten berada pada kisaran 0,7–0,9 dengan selisih yang sangat kecil—bahkan terkadang validation loss lebih rendah—yang menunjukkan tidak terjadi overfitting dan model mampu melakukan generalisasi dengan baik. Karena kurva loss sudah melandai sejak sekitar epoch ke-25, pelatihan tambahan hanya memberikan peningkatan yang sangat minim.
 
 
 ### 6.2 Visualisasi Kurva MAE
+## Visualisasi Kurva MAE
+
+Kurva ini digunakan untuk memantau **Mean Absolute Error (MAE)** model selama proses pelatihan.
+
+* Sumbu **x** menunjukkan jumlah epoch.
+* Sumbu **y** menunjukkan nilai MAE, yaitu rata-rata selisih absolut antara prediksi model dan nilai rating sebenarnya.
+* **Train MAE** menunjukkan performa model pada data pelatihan.
+* **Validation MAE** menunjukkan seberapa baik model melakukan generalisasi pada data yang tidak dilatih.
+
+MAE memberikan gambaran intuitif tentang rata-rata besar kesalahan model. Pola ideal adalah ketika kedua kurva menurun dan berada cukup dekat, yang menandakan model belajar dengan baik dan tidak overfitting.
+
 ![Kurva Loss](img/model-mae.png)
 
+Pada awal pelatihan (epoch 0–1), nilai MAE (Mean Absolute Error) sangat tinggi, dengan MAE training sekitar 3,7 dan MAE validasi sekitar 3,5, yang mencerminkan prediksi awal model masih jauh dari nilai sebenarnya. Namun, penurunan tajam terjadi dalam beberapa epoch pertama: pada epoch ke-3, MAE training sudah turun ke kisaran 1,5 dan MAE validasi ke sekitar 1,0. Hal ini menunjukkan bahwa model NeuMF sangat cepat menangkap pola dasar dari interaksi pengguna dan item. Dari epoch 4 hingga 15, penurunan MAE masih terus berlangsung meski melambat; MAE training turun secara bertahap dari sekitar 1,3 menjadi 0,75, dan MAE validasi dari 0,95 menjadi sekitar 0,65. Selanjutnya, pada epoch 15–30, baik MAE training maupun validasi mendatar di kisaran 0,6–0,7, menandakan model mulai mencapai konvergensi. Menariknya, pada beberapa titik (sekitar epoch 30 ke atas), MAE validasi sedikit lebih tinggi daripada MAE training, namun selisihnya sangat kecil, sehingga tidak mengindikasikan overfitting signifikan. Secara keseluruhan, kurva MAE yang menurun konsisten dan mendatar menunjukkan bahwa model mampu belajar secara efektif dan menghasilkan prediksi rating yang cukup akurat serta stabil di data validasi.
 
 ### 6.3 Visualisasi Kurva RMSE
+Plot ini menunjukkan perubahan **Root Mean Squared Error (RMSE)** selama pelatihan model.
+
+* Sumbu **x** menunjukkan jumlah epoch.
+* Sumbu **y** menunjukkan nilai RMSE, yaitu akar dari rata-rata kuadrat selisih antara prediksi dan nilai sebenarnya.
+* **Train RMSE** menggambarkan akurasi model terhadap data pelatihan.
+* **Validation RMSE** menunjukkan performa model pada data validasi (yang tidak dilatih).
+
+RMSE lebih sensitif terhadap error yang besar dibanding MAE, sehingga sangat berguna untuk mendeteksi prediksi yang jauh meleset.
+Kurva yang ideal adalah saat kedua garis (train dan validation) turun dan relatif dekat, menandakan model belajar dengan baik dan tidak overfitting.
 ![Kurva Loss](img/model-rmse.png)
 
+Pada awal pelatihan (epoch 0–1), nilai RMSE (Root Mean Squared Error) sangat tinggi, dengan RMSE training mencapai hampir 3,9 dan RMSE validasi sekitar 3,7. Ini wajar karena model belum belajar dan bobot masih acak. Namun, terjadi penurunan drastis pada beberapa epoch pertama: pada epoch ke-3, RMSE training turun ke sekitar 2,0, sementara RMSE validasi sudah turun mendekati 1,2. Ini menunjukkan bahwa model NeuMF mampu dengan cepat menangkap pola interaksi pengguna–item. Dari epoch 4 hingga 15, penurunan RMSE berlanjut meskipun mulai melambat—RMSE training menurun dari sekitar 1,6 menjadi 0,9, dan RMSE validasi dari sekitar 1,0 menjadi 0,83. Mulai epoch 15 ke atas hingga akhir pelatihan (epoch 37), kurva RMSE cenderung datar, berada di kisaran 0,75–0,9. Pada epoch terakhir, RMSE training sedikit lebih rendah daripada RMSE validasi, tetapi perbedaannya sangat kecil dan stabil. Ini menandakan tidak ada overfitting yang signifikan, dan model berhasil mempertahankan kemampuan generalisasi yang baik. Penurunan RMSE yang konsisten dan stabil juga memperkuat bukti bahwa prediksi model semakin akurat dari waktu ke waktu, meskipun peningkatannya semakin kecil seiring bertambahnya epoch.
+
+### Kesimpulan Performa Model
+Berdasarkan keseluruhan hasil plot untuk metrik Loss, MAE, dan RMSE selama 37 epoch pelatihan, dapat disimpulkan bahwa model NeuMF menunjukkan performa pelatihan yang sangat baik dan stabil. Ketiga metrik tersebut mengalami penurunan drastis pada beberapa epoch pertama, menandakan bahwa model dengan cepat mampu mempelajari pola interaksi antara pengguna dan item. Setelah itu, penurunan metrik berlangsung lebih lambat namun konsisten, hingga akhirnya mencapai fase konvergensi tanpa tanda-tanda overfitting—ditunjukkan oleh selisih yang kecil antara nilai training dan validation, bahkan pada epoch-epoch akhir. Hal ini membuktikan bahwa model tidak hanya mampu menyesuaikan diri dengan data pelatihan, tetapi juga mengeneralisasi dengan baik terhadap data yang belum pernah dilihat. Dengan MAE dan RMSE akhir yang rendah dan stabil, model dapat dianggap cukup akurat dalam memprediksi rating user terhadap item, serta siap untuk diimplementasikan lebih lanjut atau digunakan sebagai dasar sistem rekomendasi.
 
 Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
 
