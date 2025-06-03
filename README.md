@@ -171,6 +171,20 @@ Berikut adalah **kelebihan dan kekurangan** dari model **NeuMF (Neural Matrix Fa
 4. **Konsumsi Memori Lebih Tinggi**
    Karena memiliki embedding terpisah untuk GMF dan MLP, jumlah parameter bertambah dua kali lipat dibanding model embedding tunggal.
 
+Berikut adalah rekomendasi 10 buku teratas untuk user 4 dalam bentuk tabel:
+
+| No. | Book ID | Predicted Rating | Title                                                                            | Author                                                                                                                                                   |
+| --- | ------- | ---------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | 6920    | 4.8399           | The Indispensable Calvin and Hobbes                                              | Bill Watterson                                                                                                                                           |
+| 2   | 9566    | 4.8367           | Attack of the Deranged Mutant Killer Monster Snow Goons                          | Bill Watterson                                                                                                                                           |
+| 3   | 3395    | 4.7994           | The Kindly Ones (The Sandman #9)                                                 | Neil Gaiman, Marc Hempel, Richard Case, D'Israeli, Teddy Kristiansen, Glyn Dillon, Charles Vess, Dean Ormston, Kevin Nowlan, Todd Klein, Frank McConnell |
+| 4   | 4483    | 4.7937           | It's a Magical World: A Calvin and Hobbes Collection                             | Bill Watterson                                                                                                                                           |
+| 5   | 8946    | 4.7808           | The Divan                                                                        | Hafez                                                                                                                                                    |
+| 6   | 7947    | 4.7769           | ESV Study Bible                                                                  | Anonymous, Lane T. Dennis, Wayne A. Grudem                                                                                                               |
+| 7   | 4344    | 4.7718           | The Day the Crayons Quit                                                         | Drew Daywalt, Oliver Jeffers                                                                                                                             |
+| 8   | 6902    | 4.7694           | Standing for Something: 10 Neglected Virtues That Will Heal Our Hearts and Homes | Gordon B. Hinckley                                                                                                                                       |
+| 9   | 3491    | 4.7654           | Just Mercy: A Story of Justice and Redemption                                    | Bryan Stevenson                                                                                                                                          |
+| 10  | 862     | 4.7581           | Words of Radiance (The Stormlight Archive, #2)                                   | Brandon Sanderson                                                                                                                                        |
 
 Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
 
