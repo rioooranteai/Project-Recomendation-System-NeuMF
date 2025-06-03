@@ -15,10 +15,6 @@ Dalam upaya membangun sistem rekomendasi buku yang efektif, penelitian ini akan 
 
 ## Business Understanding
 
-Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
 1. Pengguna kesulitan menemukan produk atau item yang sesuai dengan preferensi mereka karena banyaknya pilihan yang tersedia di platform, sehingga menurunkan kepuasan dan loyalitas pengguna.
 2. Model rekomendasi harus mampu mempelajari pola interaksi pengguna-item secara efektif tanpa mengalami overfitting agar dapat diandalkan pada data baru.
@@ -102,7 +98,7 @@ Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengump
 | 4   | original\_title             | 585            |
 | 5   | language\_code              | 1,084          |
 
-Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering User-Based dengan fokus pada data rating saja.
+Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering dengan fokus pada data rating saja.
 
 ## Data Preparation
 ### 4.1 Pemisahan Fitur dan Target
@@ -193,12 +189,6 @@ Berikut adalah rekomendasi 10 buku teratas untuk user 4:
 | 8   | 6902    | 4.7694           | Standing for Something: 10 Neglected Virtues That Will Heal Our Hearts and Homes | Gordon B. Hinckley                                                                                                                                       |
 | 9   | 3491    | 4.7654           | Just Mercy: A Story of Justice and Redemption                                    | Bryan Stevenson                                                                                                                                          |
 | 10  | 862     | 4.7581           | Words of Radiance (The Stormlight Archive, #2)                                   | Brandon Sanderson                                                                                                                                        |
-
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
 
 ## Evaluation 
 ### 6.1 Visualisasi Kurva Loss
