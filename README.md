@@ -1,11 +1,16 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Mario Valerian Rante Ta'dung
 
 ## Project Overview
 
-Perkembangan pesat teknologi digital telah menghadirkan ledakan informasi dan pilihan yang tak terbatas bagi pengguna, termasuk dalam hal pemilihan buku. Fenomena ini, yang sering disebut sebagai information overload, dapat menyulitkan pengguna dalam menemukan buku yang sesuai dengan minat dan preferensi mereka di antara jutaan judul yang tersedia. Oleh karena itu, dibutuhkan suatu sistem yang dapat menyajikan informasi yang paling relevan bagi pengguna, dan teknologi yang digunakan untuk itu adalah sistem rekomendasi. Sistem rekomendasi pada dasarnya mempermudah pengguna dalam menemukan berbagai jenis konten atau layanan—mulai dari buku hingga situs web—dengan menganalisis dan menyatukan masukan, termasuk ulasan dari pengguna lain maupun sumber terpercaya [1]. Dengan menganalisis data historis interaksi pengguna-item, SR bertujuan untuk memprediksi preferensi pengguna dan merekomendasikan item yang paling relevan, sehingga menjadi alat yang sangat penting dalam berbagai platform digital saat ini.
+Perkembangan pesat teknologi digital telah menghadirkan ledakan informasi dan pilihan yang tak terbatas bagi pengguna, termasuk dalam hal pemilihan buku. Fenomena ini, yang sering disebut sebagai information overload, dapat menyulitkan pengguna dalam menemukan buku yang sesuai dengan minat dan preferensi mereka di antara jutaan judul yang tersedia. Oleh karena itu, dibutuhkan suatu sistem yang dapat menyajikan informasi yang paling relevan bagi pengguna, dan teknologi yang digunakan untuk itu adalah sistem rekomendasi. Sistem rekomendasi pada dasarnya mempermudah pengguna dalam menemukan berbagai jenis konten atau layanan mulai dari buku hingga situs web, dengan menganalisis dan menyatukan masukan, termasuk ulasan dari pengguna lain maupun sumber terpercaya [1]. Dengan menganalisis data historis interaksi pengguna-item, SR bertujuan untuk memprediksi preferensi pengguna dan merekomendasikan item yang paling relevan, sehingga menjadi alat yang sangat penting dalam berbagai platform digital saat ini.
 
 Dalam upaya membangun sistem rekomendasi buku yang efektif, penelitian ini akan memanfaatkan dataset goodbooks-10k yang kaya akan explicit feedback berupa rating pengguna terhadap buku. Untuk melakukan prediksi rating, akan diimplementasikan model Neural Matrix Factorization (NeuMF), sebuah kerangka kerja yang menggeneralisasi faktorisasi matriks dengan menggunakan jaringan saraf. NeuMF mampu menangkap interaksi non-linear yang kompleks antara pengguna dan item dengan menggabungkan kekuatan Generalized Matrix Factorization (GMF) untuk menangkap hubungan linear dan Multi-Layer Perceptron (MLP) untuk memodelkan interaksi non-linear [2]. Penerapan NeuMF pada dataset goodbooks-10k diharapkan dapat menghasilkan prediksi rating yang akurat, yang pada akhirnya bertujuan untuk membantu pengguna menemukan buku yang paling sesuai dengan selera mereka secara lebih efisien.
 
+### **Referensi**
+
+\[1] D. H. Park, H. K. Kim, I. Y. Choi, and J. K. Kim, “A literature review and classification of recommender systems research,” Expert Syst. Appl., vol. 39, no. 11, pp. 10059–10072, Aug. 2012. doi: 10.1016/j.eswa.2012.02.085.
+
+\[2] X. He, L. Liao, H. Zhang, L. Nie, X. Hu, and T.-S. Chua, “Neural Collaborative Filtering,” in Proceedings of the 26th International Conference on World Wide Web, Perth, Australia, 2017, pp. 173–182. doi: 10.1145/3038912.3052569.
 
 
 ## Business Understanding
