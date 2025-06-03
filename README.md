@@ -133,6 +133,45 @@ for train_idx, val_idx in splitter.split(X, ratings['rating']):
 ```
 
 ## Modeling
+### NeuMF (Neural Matrix Factorization)
+Model **NeuMF** menggabungkan dua jalur pembelajaran, yaitu **Generalized Matrix Factorization (GMF)** dan **Multi-Layer Perceptron (MLP)**, untuk menangkap interaksi linier dan non-linier antara pengguna dan item. GMF menggunakan hasil perkalian elemen-per-elemen (Hadamard product) antara embedding pengguna dan item, sedangkan MLP menggunakan penggabungan (concatenation) embedding tersebut yang diproses melalui beberapa layer dense dengan aktivasi non-linear.
+
+Keluaran dari GMF dan MLP kemudian digabung (concatenated) dan diteruskan ke layer output berbentuk **Dense(1)** dengan aktivasi **linear** untuk memprediksi nilai rating eksplisit. Layer ini juga menggunakan regularisasi **L2** ringan pada kernel untuk membantu mengurangi overfitting. Model dikompilasi dengan **loss MSE**, **optimizer Adam** ber-learning rate rendah (**1e-4**), dan metrik evaluasi **MAE** serta **RMSE**, sehingga cocok untuk tugas regresi dalam sistem rekomendasi berbasis rating.
+
+Berikut adalah **kelebihan dan kekurangan** dari model **NeuMF (Neural Matrix Factorization)**, khususnya pada implementasi untuk **explicit feedback (prediksi rating)**:
+
+### ✅ Kelebihan NeuMF:
+
+1. **Gabungan Linier dan Non-linier**
+   Menggabungkan GMF (interaksi linier) dan MLP (interaksi non-linier) memungkinkan model menangkap berbagai pola kompleks antara pengguna dan item.
+
+2. **Fleksibel dan Ekspresif**
+   Dengan arsitektur neural network, model dapat menangani hubungan yang tidak dapat dijelaskan oleh metode matrix factorization konvensional (seperti dot product saja).
+
+3. **Kemampuan Generalisasi Lebih Baik**
+   Dengan regularisasi dan arsitektur yang dalam, model mampu belajar representasi yang lebih umum dan mencegah overfitting jika dilatih dengan cukup data.
+
+4. **Dapat Disesuaikan untuk Explicit maupun Implicit Feedback**
+   Arsitektur NeuMF cukup fleksibel untuk disesuaikan dengan task regresi (prediksi rating) maupun ranking (implicit feedback).
+
+5. **Mendukung Penskalaan ke Deep Learning Framework**
+   Cocok untuk diterapkan dengan TensorFlow atau PyTorch, memungkinkan integrasi dengan teknik deep learning lanjutan seperti attention, metadata enrichment, dll.
+
+### ❌ Kekurangan NeuMF:
+
+1. **Kompleksitas Model Lebih Tinggi**
+   Dibanding model klasik (seperti matrix factorization biasa), NeuMF membutuhkan lebih banyak parameter dan tuning, sehingga lebih rentan terhadap overfitting jika data sedikit.
+
+2. **Waktu Latih Lebih Lama**
+   Karena menggunakan dua subnetwork dan beberapa layer dense, waktu pelatihan lebih lama dibanding model ringan seperti SVD atau MF.
+
+3. **Memerlukan Tuning yang Cermat**
+   Performanya sangat tergantung pada arsitektur MLP, ukuran embedding, regularisasi, dan learning rate, sehingga perlu eksperimen dan validasi yang baik.
+
+4. **Konsumsi Memori Lebih Tinggi**
+   Karena memiliki embedding terpisah untuk GMF dan MLP, jumlah parameter bertambah dua kali lipat dibanding model embedding tunggal.
+
+
 Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
