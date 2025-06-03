@@ -92,15 +92,15 @@ Namun, dalam proyek ini hanya dua file yang digunakan, yaitu **`ratings.csv`** d
 | 23  | small\_image\_url           | object    | 10,000          | URL gambar sampul kecil (thumbnail)                         |
 
 ### 3.2 Distribusi Rating
-![Korelasi Antar Fitur](img/class-distribution.png)
+![Distribusi Rating](img/class-distribution.png)
 - Berdasarkan grafik distribusi rating pengguna, terlihat bahwa mayoritas pengguna cenderung memberikan rating tinggi, dengan rating 4 menjadi yang paling banyak diberikan, disusul oleh rating 5. Sebaliknya, rating rendah seperti 1 dan 2 jarang diberikan, menunjukkan bahwa pengguna cenderung memiliki persepsi positif terhadap film yang mereka tonton. Rating 3 sebagai nilai tengah juga cukup banyak muncul, mencerminkan adanya penilaian netral. Distribusi ini bersifat positif atau condong ke arah rating tinggi, yang merupakan pola umum dalam data rating film. Pola ini penting untuk diperhatikan saat membangun sistem rekomendasi, karena kecenderungan pengguna memberikan rating tinggi dapat memengaruhi cara model dalam membedakan preferensi antar pengguna.
 
 ### 3.3 Rating Per-User
-![Korelasi Antar Fitur](img/rating-peruser.png)
+![Rating Per-User](img/rating-peruser.png)
 - Dari histogram “Distribusi Jumlah Rating per Pengguna” di atas, dapat dilihat bahwa mayoritas pengguna hanya memberi rating pada sejumlah kecil buku (misalnya 1–5 buku), di mana puncak tertinggi (sekitar 20.000 pengguna) berada pada bin paling kiri (pengguna yang memberi rating sangat rendah). Seiring meningkatnya jumlah buku yang dirating per pengguna, jumlah pengguna menurun drastis—misalnya hanya beberapa ribu pengguna yang merating sekitar 10–20 buku, dan semakin sedikit lagi (beberapa ratus atau puluhan saja) yang merating puluhan hingga ratusan buku. Kurva kepadatan mempertegas pola ini: sangat “menonjol” di nilai rendah dan kemudian memerah ke kanan dengan ekor panjang hingga sekitar 200 buku. Artinya, distribusi ini sangat miring ke kanan (right-skewed): sebagian besar pengguna bersifat “casual” dengan sedikit interaksi (sedikit memberi rating), sedangkan hanya segelintir “power user” yang banyak merating buku.
 
 ### 3.4 Rating Per-Book
-![Korelasi Antar Fitur](img/rating-perbuku.png)
+![Rating Per-Book](img/rating-perbuku.png)
 - Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengumpulkan jumlah rating yang sangat tinggi—terkonsentrasi di kisaran 90–100—sementara sangat sedikit buku yang mendapat rating di bawah 50, sehingga distribusinya tampak sangat miring ke kanan; hal ini menandakan bahwa data kemungkinan hanya mencakup buku-buku populer yang sudah memiliki basis pembaca/rater besar, sehingga nilai rata‐rata jumlah rating per buku menjadi sangat dekat dengan batas atas (100).
 
 ### 3.4 Hitung Missing Value
@@ -204,7 +204,30 @@ Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk meny
 - Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
 - Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
 
-## Evaluation
+## Evaluation 
+### 6.1 Visualisasi Kurva Loss
+Plot ini digunakan untuk memantau performa model selama proses pelatihan. Kurva menunjukkan bagaimana nilai **loss** pada data pelatihan (`Train Loss`) dan data validasi (`Validation Loss`) berubah seiring bertambahnya epoch.
+
+* Sumbu **x** menunjukkan jumlah epoch (iterasi pelatihan).
+* Sumbu **y** menunjukkan nilai loss (MSE) pada masing-masing epoch.
+* Kurva **Train Loss** mencerminkan seberapa baik model mempelajari data pelatihan.
+* Kurva **Validation Loss** menunjukkan generalisasi model terhadap data yang tidak dilatih.
+
+Tujuan dari visualisasi ini adalah untuk mendeteksi tanda-tanda **overfitting** (misalnya, ketika `val_loss` meningkat sementara `loss` terus menurun) atau **underfitting** (kedua kurva tetap tinggi). Idealnya, kedua kurva menurun dan saling berdekatan.
+
+![Kurva Loss](img/model-loss.png)
+
+- Pada awal pelatihan (epoch 0–1), nilai loss untuk data training dan validasi sangat tinggi (sekitar 15 dan 13) karena bobot model masih diinisialisasi secara acak. Namun, pada epoch pertama, terjadi penurunan drastis: loss training turun menjadi sekitar 7 dan loss validasi menjadi sekitar 3,5, menunjukkan bahwa model mulai mampu mengenali pola interaksi pengguna dan item. Pada epoch 1 hingga 5, loss terus menurun dengan cepat—training loss mencapai sekitar 2,5 dan validation loss mendekati 1,1—menandakan bahwa NeuMF berhasil menyesuaikan bobot embedding dan lapisan dense secara efektif. Setelah epoch ke-5, penurunan loss berjalan lebih lambat (epoch 5–15), dengan training loss turun dari ≈2,5 ke ≈1,1 dan validation loss dari ≈1,1 ke ≈0,8, menandakan model mulai mendekati konvergensi. Dari epoch 15 hingga 37, nilai loss keduanya konsisten berada pada kisaran 0,7–0,9 dengan selisih yang sangat kecil—bahkan terkadang validation loss lebih rendah—yang menunjukkan tidak terjadi overfitting dan model mampu melakukan generalisasi dengan baik. Karena kurva loss sudah melandai sejak sekitar epoch ke-25, pelatihan tambahan hanya memberikan peningkatan yang sangat minim.
+
+
+### 6.2 Visualisasi Kurva MAE
+![Kurva Loss](img/model-mae.png)
+
+
+### 6.3 Visualisasi Kurva RMSE
+![Kurva Loss](img/model-rmse.png)
+
+
 Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
 
 Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
