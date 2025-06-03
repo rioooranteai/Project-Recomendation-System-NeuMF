@@ -93,6 +93,7 @@ Namun, dalam proyek ini hanya dua file yang digunakan, yaitu **`ratings.csv`** d
 
 ### 3.2 Distribusi Rating
 ![Distribusi Rating](img/class-distribution.png)
+
 Berdasarkan grafik distribusi rating pengguna, terlihat bahwa mayoritas pengguna cenderung memberikan rating tinggi, dengan rating 4 menjadi yang paling banyak diberikan, disusul oleh rating 5. Sebaliknya, rating rendah seperti 1 dan 2 jarang diberikan, menunjukkan bahwa pengguna cenderung memiliki persepsi positif terhadap film yang mereka tonton. Rating 3 sebagai nilai tengah juga cukup banyak muncul, mencerminkan adanya penilaian netral. Distribusi ini bersifat positif atau condong ke arah rating tinggi, yang merupakan pola umum dalam data rating film. Pola ini penting untuk diperhatikan saat membangun sistem rekomendasi, karena kecenderungan pengguna memberikan rating tinggi dapat memengaruhi cara model dalam membedakan preferensi antar pengguna.
 
 ### 3.3 Rating Per-User
@@ -296,8 +297,6 @@ Plot ini menunjukkan perubahan **Root Mean Squared Error (RMSE)** selama proses 
 * **Train RMSE**: mengukur akurasi model pada data pelatihan.
 * **Validation RMSE**: mengukur seberapa baik model mengeneralisasi ke data yang tidak dilatih.
 
----
-
 ### 🔢 Metrik Evaluasi: Root Mean Squared Error (RMSE)
 
 #### 📐 Formula:
@@ -319,8 +318,6 @@ $$
 
 RMSE **memberikan penalti lebih besar terhadap error yang besar** (karena efek kuadrat), sehingga sangat berguna untuk menilai **seberapa parah kesalahan terbesar** model.
 
----
-
 ### 🎯 Tujuan Visualisasi
 
 Visualisasi RMSE bertujuan untuk:
@@ -335,14 +332,7 @@ Visualisasi RMSE bertujuan untuk:
 
 Pada awal pelatihan (epoch 0–1), nilai RMSE (Root Mean Squared Error) sangat tinggi, dengan RMSE training mencapai hampir 3,9 dan RMSE validasi sekitar 3,7. Ini wajar karena model belum belajar dan bobot masih acak. Namun, terjadi penurunan drastis pada beberapa epoch pertama: pada epoch ke-3, RMSE training turun ke sekitar 2,0, sementara RMSE validasi sudah turun mendekati 1,2. Ini menunjukkan bahwa model NeuMF mampu dengan cepat menangkap pola interaksi pengguna–item. Dari epoch 4 hingga 15, penurunan RMSE berlanjut meskipun mulai melambat—RMSE training menurun dari sekitar 1,6 menjadi 0,9, dan RMSE validasi dari sekitar 1,0 menjadi 0,83. Mulai epoch 15 ke atas hingga akhir pelatihan (epoch 37), kurva RMSE cenderung datar, berada di kisaran 0,75–0,9. Pada epoch terakhir, RMSE training sedikit lebih rendah daripada RMSE validasi, tetapi perbedaannya sangat kecil dan stabil. Ini menandakan tidak ada overfitting yang signifikan, dan model berhasil mempertahankan kemampuan generalisasi yang baik. Penurunan RMSE yang konsisten dan stabil juga memperkuat bukti bahwa prediksi model semakin akurat dari waktu ke waktu, meskipun peningkatannya semakin kecil seiring bertambahnya epoch.
 
-### Kesimpulan Performa Model
+## Kesimpulan Performa Model
 Berdasarkan keseluruhan hasil plot untuk metrik Loss, MAE, dan RMSE selama 37 epoch pelatihan, dapat disimpulkan bahwa model NeuMF menunjukkan performa pelatihan yang sangat baik dan stabil. Ketiga metrik tersebut mengalami penurunan drastis pada beberapa epoch pertama, menandakan bahwa model dengan cepat mampu mempelajari pola interaksi antara pengguna dan item. Setelah itu, penurunan metrik berlangsung lebih lambat namun konsisten, hingga akhirnya mencapai fase konvergensi tanpa tanda-tanda overfitting—ditunjukkan oleh selisih yang kecil antara nilai training dan validation, bahkan pada epoch-epoch akhir. Hal ini membuktikan bahwa model tidak hanya mampu menyesuaikan diri dengan data pelatihan, tetapi juga mengeneralisasi dengan baik terhadap data yang belum pernah dilihat. Dengan MAE dan RMSE akhir yang rendah dan stabil, model dapat dianggap cukup akurat dalam memprediksi rating user terhadap item, serta siap untuk diimplementasikan lebih lanjut atau digunakan sebagai dasar sistem rekomendasi.
 
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-
-**---Ini adalah bagian akhir laporan---**
