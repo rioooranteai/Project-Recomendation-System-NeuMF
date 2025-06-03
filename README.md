@@ -106,7 +106,7 @@ Dari histogram tersebut terlihat bahwa hampir seluruh buku dalam dataset mengump
 | 4   | original\_title             | 585            |
 | 5   | language\_code              | 1,084          |
 
-Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering dengan fokus pada data rating saja.
+Masih terdapat beberapa detail tentang buku yang tidak lengkap. Namun hal ini tidak akan menjadi masalah karena fokus kita adalah melakukan Collaborative Filtering dengan fokus pada data rating saja. Sementara untuk data rating, semuanya tersedia yang artinya tidak ditemukan missing value.
 
 ## Data Preparation
 ### 4.1 Pemisahan Fitur dan Target
