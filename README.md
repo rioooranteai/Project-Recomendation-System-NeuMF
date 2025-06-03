@@ -127,7 +127,7 @@ for train_idx, val_idx in splitter.split(X, ratings['rating']):
     y_train, y_val = y[train_idx], y[val_idx]
 ```
 
-## Modeling
+## Modeling and Result
 ### NeuMF (Neural Matrix Factorization)
 Model **NeuMF** menggabungkan dua jalur pembelajaran, yaitu **Generalized Matrix Factorization (GMF)** dan **Multi-Layer Perceptron (MLP)**, untuk menangkap interaksi linier dan non-linier antara pengguna dan item. GMF menggunakan hasil perkalian elemen-per-elemen (Hadamard product) antara embedding pengguna dan item, sedangkan MLP menggunakan penggabungan (concatenation) embedding tersebut yang diproses melalui beberapa layer dense dengan aktivasi non-linear.
 
