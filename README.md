@@ -27,10 +27,10 @@ Dalam upaya membangun sistem rekomendasi buku yang efektif, penelitian ini akan 
 
 ### Solution Statements
 
-1. Membangun model sistem rekomendasi berbasis prediksi rating menggunakan pendekatan pembelajaran mendalam (deep learning).
-2. Menggunakan model **NeuMF (Neural Matrix Factorization)** yang mampu menangkap interaksi kompleks antara pengguna dan item.
-3. Mengevaluasi performa model menggunakan metrik regresi: **MSE (Mean Squared Error)**, **MAE (Mean Absolute Error)**, dan **RMSE (Root Mean Squared Error)**.
-4. Memantau proses pelatihan melalui visualisasi kurva loss dan metrik error untuk menghindari overfitting dan memastikan model mencapai konvergensi.
+1. Membangun **model sistem rekomendasi berbasis Collaborative Filtering** dengan pendekatan prediksi rating menggunakan pembelajaran mendalam (deep learning).
+2. Menggunakan model **NeuMF (Neural Matrix Factorization)** yang menggabungkan keunggulan dari Generalized Matrix Factorization (GMF) dan Multi-Layer Perceptron (MLP), sehingga mampu menangkap interaksi kompleks antara pengguna dan item.
+3. Mengevaluasi performa model menggunakan metrik regresi: **MSE (Mean Squared Error)**, **MAE (Mean Absolute Error)**, dan **RMSE (Root Mean Squared Error)** untuk menilai akurasi prediksi rating.
+4. Memantau proses pelatihan melalui **visualisasi kurva loss dan metrik error** guna menghindari overfitting dan memastikan bahwa model telah mencapai konvergensi yang optimal.
 
 ## Data Understanding
 Dataset yang digunakan dalam proyek ini adalah **Goodbooks-10K** ([Kaggle - Goodbooks-10k Dataset](https://www.kaggle.com/datasets/zygmunt/goodbooks-10k)). Secara keseluruhan, dataset ini terdiri dari beberapa file, yaitu:
