@@ -8,9 +8,10 @@ Dalam upaya membangun sistem rekomendasi buku yang efektif, penelitian ini akan 
 
 ### **Referensi**
 
-\[1] D. H. Park, H. K. Kim, I. Y. Choi, and J. K. Kim, “A literature review and classification of recommender systems research,” Expert Syst. Appl., vol. 39, no. 11, pp. 10059–10072, Aug. 2012. doi: 10.1016/j.eswa.2012.02.085.
+\[1] 	H. K. K. I. Y. C. J. K. K. Deuk Hee Park, "A literature review and classification of recommender systems research," Expert Systems with Applications, vol. 39, no. 11, pp. 10059-10072, 2012. 
 
-\[2] X. He, L. Liao, H. Zhang, L. Nie, X. Hu, and T.-S. Chua, “Neural Collaborative Filtering,” in Proceedings of the 26th International Conference on World Wide Web, Perth, Australia, 2017, pp. 173–182. doi: 10.1145/3038912.3052569.
+\[2] 	L. L. H. Z. L. N. X. H. T.-S. C. Xiangnan He, "Neural Collaborative Filtering," Proceedings of the 26th International Conference on World Wide Web, p. 173–182, 2017. 
+
 
 
 ## Business Understanding
