@@ -134,6 +134,7 @@ Model **NeuMF** menggabungkan dua jalur pembelajaran, yaitu **Generalized Matrix
 Keluaran dari GMF dan MLP kemudian digabung (concatenated) dan diteruskan ke layer output berbentuk **Dense(1)** dengan aktivasi **linear** untuk memprediksi nilai rating eksplisit. Layer ini juga menggunakan regularisasi **L2** ringan pada kernel untuk membantu mengurangi overfitting. Model dikompilasi dengan **loss MSE**, **optimizer Adam** ber-learning rate rendah (**1e-4**), dan metrik evaluasi **MAE** serta **RMSE**, sehingga cocok untuk tugas regresi dalam sistem rekomendasi berbasis rating.
 
 Di bawah ini adalah sebuah ilustrasi Model original **NeuMF** yang didapatkan dari [https://d2l.ai/chapter_recommender-systems/neumf.html](https://d2l.ai/chapter_recommender-systems/neumf.html)
+
 ![Rating Per-Book](img/ilustrasi-NeuMF.png)
 
 
